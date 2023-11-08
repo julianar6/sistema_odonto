@@ -16,7 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from sistema_odonto.views import saludar_con_html
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
+    # Aqui agregar mis URLS
+    # path(RUTA, VIEW)
+    # La RUTA de la URL puede ser diferente al nombre de la view
+    path("", saludar_con_html, name="inicio"),
 ]
