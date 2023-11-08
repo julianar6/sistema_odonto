@@ -28,16 +28,17 @@ class Consultas (models.Model):
     profesional = models.CharField(max_length=256)
     fecha_consulta =  models.DateField(null=True)
     identificacion = models.CharField(max_length=32)
-    codigo_cups = models.IntegerField(max_length=5000)
+    codigo_cups = models.IntegerField()
     finalidad_consulta = models.TextField()
-    causa_externa = models.IntegerField(max_length=5000)
-    codigo_diagnostico_ppal = models.IntegerField(max_length=5000)
-    codigo_diag_opc = models.IntegerField(max_length=5000)
-    valor_de_consulta = models.IntegerField(max_length=5000)
-    valor_total = models.IntegerField(max_length=5000)
+    causa_externa = models.IntegerField()
+    codigo_diagnostico_ppal = models.IntegerField()
+    codigo_diag_opc = models.IntegerField()
+    valor_de_consulta = models.IntegerField()
+    valor_total = models.IntegerField()
     
 
 class Empleados (models.Model):
+
     nombre = models.CharField(max_length=64)
     apellido = models.CharField(max_length=256)
     genero = models.CharField(max_length=256)
