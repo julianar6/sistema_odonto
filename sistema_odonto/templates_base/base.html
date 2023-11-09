@@ -25,11 +25,11 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
-                <a class="navbar-brand" href="">Pacientes</a>
-                <a class="navbar-brand" href="">Consultas</a>
-                <a class="navbar-brand" href="">Empleados</a>
-                <a class="navbar-brand" href="https://www.google.com">Google</a>
-                <a class="btn btn-primary" href="#signup">INICIAR</a>
+                <a class="navbar-brand" href="{% url 'listar_paciente' %}">Pacientes</a>
+                <a class="navbar-brand" href="{% url 'listar_consultas' %}">Consultas</a>
+                <a class="navbar-brand" href="{% url 'listar_empleados' %}">Empleados</a>
+                <a class="navbar-brand" href="{% url 'listar_odontologo' %}"> Odontologos</a>
+                
             </div>
         </nav>
 

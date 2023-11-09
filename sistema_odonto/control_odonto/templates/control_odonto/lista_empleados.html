@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>Control de Empleados</title>
+{% endblock titulo %}
+
+{% block contenido %}
+<h3>Empleados Registrados</h3>
+
+<br>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Género</th>
+      <th>Identificación</th>
+      <th>Tipo ID</th>
+      <th>Fecha de Nacimiento</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for empleado in object_list %}
+    <tr>
+      <td>{{ empleado.id }}</td>
+      <td>{{ empleado.nombre }}</td>
+      <td>{{ empleado.apellido }}</td>
+      <td>{{ empleado.genero }}</td>
+      <td>{{ empleado.identificacion }}</td>
+      <td>{{ empleado.tipo_id }}</td>
+      <td>{{ empleado.fecha_nacimiento }}</td>
+      <td>{{ empleado.email }}</td>
+      
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock contenido %}

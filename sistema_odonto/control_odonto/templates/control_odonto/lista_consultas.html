@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>Control Odonto - Consultas</title>
+{% endblock titulo %}
+
+{% block contenido %}
+<h3>Consultas Registradas</h3>
+<a href="{% url 'crear_consulta' %}">Registrar Consulta</a>
+<br>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Profesional</th>
+      <th>Fecha de Consulta</th>
+      <th>Identificación</th>
+      <th>Código CUPS</th>
+      <th>Finalidad de la Consulta</th>
+      <th>Causa Externa</th>
+      <th>Diagnóstico Principal</th>
+      <th>Diagnóstico Opcional</th>
+      <th>Valor de la Consulta</th>
+      <th>Valor Total</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    {% for consulta in consultas %}
+    <tr>
+      <td>{{ consulta.id }}</td>
+      <td>{{ consulta.profesional }}</td>
+      <td>{{ consulta.fecha_consulta }}</td>
+      <td>{{ consulta.identificacion }}</td>
+      <td>{{ consulta.codigo_cups }}</td>
+      <td>{{ consulta.finalidad_consulta }}</td>
+      <td>{{ consulta.causa_externa }}</td>
+      <td>{{ consulta.codigo_diagnostico_ppal }}</td>
+      <td>{{ consulta.codigo_diag_opc }}</td>
+      <td>{{ consulta.valor_de_consulta }}</td>
+      <td>{{ consulta.valor_total }}</td>
+     
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock contenido %}

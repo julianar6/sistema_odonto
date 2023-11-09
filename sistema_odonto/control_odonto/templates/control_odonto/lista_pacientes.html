@@ -23,15 +23,16 @@
     </tr>
   </thead>
   <tbody>
-    {% for pacientes in object_list %}
+    
+    {% for paciente in pacientes %}
     <tr>
-      <td>{{ pacientes.id }}</td>
-      <td>{{ pacientes.nombre }}</td>
-      <td>{{ pacientes.apellido }}</td>
-      <td>{{ pacientes.genero }}</td>
-      <td>{{ pacientes.telefono }}</td>
-      <td>{{ pacientes.identificacion }}</td>
-      <td>{{ pacientes.email }}</td>
+      <td>{{ paciente.id }}</td>
+      <td>{{ paciente.nombre }}</td>
+      <td>{{ paciente.apellido }}</td>
+      <td>{{ paciente.genero }}</td>
+      <td>{{ paciente.telefono }}</td>
+      <td>{{ paciente.identificacion }}</td>
+      <td>{{ paciente.email }}</td>
       
       </td>
     </tr>

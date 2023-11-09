@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>Control Odonto - Odontólogos</title>
+{% endblock titulo %}
+
+{% block contenido %}
+<h3>Odontólogos Registrados</h3>
+<a href="{% url 'crear_odontologo' %}">Registrar odontologo</a>
+<br>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Email</th>
+      <th>Teléfono</th>
+      <th>Identificación</th>
+      <th>Fecha de Nacimiento</th>
+      <th>Especialidad</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    {% for odontologo in object_list %}
+    <tr>
+      <td>{{ odontologo.id }}</td>
+      <td>{{ odontologo.nombre }}</td>
+      <td>{{ odontologo.apellido }}</td>
+      <td>{{ odontologo.email }}</td>
+      <td>{{ odontologo.telefono }}</td>
+      <td>{{ odontologo.identidicacion }}</td>
+      <td>{{ odontologo.fecha_nacimiento }}</td>
+      <td>{{ odontologo.especialidad }}</td>
+      
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock contenido %}

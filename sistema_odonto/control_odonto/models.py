@@ -32,7 +32,7 @@ class Consultas (models.Model):
     identificacion = models.CharField(max_length=32)
     codigo_cups = models.IntegerField()
     finalidad_consulta = models.TextField()
-    causa_externa = models.IntegerField()
+    causa_externa = models.TextField()
     codigo_diagnostico_ppal = models.IntegerField()
     codigo_diag_opc = models.IntegerField()
     valor_de_consulta = models.IntegerField()

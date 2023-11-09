@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
 {% block titulo %}
-<title>Control Odonto - Crear paciente</title>
+<title>Control Odonto - Crear Odontologo</title>
 {% endblock titulo %}
 
 {% block contenido %}
-<h3>Crear paciente</h3>
+<h3>Crear Odontologo</h3>
 <form method="post">
   {% csrf_token %}
   {{ formulario.as_p }}
   <input class="btn btn-success" type="submit" value="Guardar" />
 </form>
 <br>
-<a href="{% url 'listar_paciente' %}">Volver a la lista</a>
+<a href="{% url 'listar_odontologo' %}">Volver a la lista</a>
 {% endblock contenido %}
