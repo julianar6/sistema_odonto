@@ -26,6 +26,9 @@ class Odontologo(models.Model):
     fecha_nacimiento = models.DateField(null=True)
     especialidad = models.CharField(max_length=32)
 
+    def __str__(self):
+        return f"{self.nombre} ({self.identidicacion})"
+
 class Consultas (models.Model):
     profesional = models.CharField(max_length=256)
     fecha_consulta =  models.DateField(null=True)
@@ -37,7 +40,9 @@ class Consultas (models.Model):
     codigo_diag_opc = models.IntegerField()
     valor_de_consulta = models.IntegerField()
     valor_total = models.IntegerField()
-    
+
+    def __str__(self):
+        return f"{self.profesional} ({self.identificacion})"
 
 class Empleados (models.Model):
 
@@ -49,3 +54,6 @@ class Empleados (models.Model):
     tipo_id = models.CharField(max_length=256)
     fecha_nacimiento = models.DateField(null=True)
     email = models.EmailField(blank=True)
+
+    def __str__(self):
+        return f"{self.nombre} ({self.apellido})"

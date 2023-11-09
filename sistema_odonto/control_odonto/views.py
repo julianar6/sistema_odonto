@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from control_odonto.models import Consultas,Pacientes,Odontologo,Empleados
@@ -154,3 +155,82 @@ def listar_odontologo(request):
     )
     return http_response
 
+def buscar_pacientes(request):
+    if request.method == "POST":
+        data = request.POST
+        busqueda = data["busqueda"]
+        # Filtro simple
+        # cursos = Curso.objects.filter(comision__contains=busqueda)
+        # Ejemplo filtro avanzado
+        paciente = Pacientes.objects.filter(
+             Q(nombre__icontains=busqueda) | Q(apellido__contains=busqueda)
+        )
+
+        contexto = {
+            "pacientes": paciente,
+        }
+        http_response = render(
+            request=request,
+            template_name='control_odonto/lista_pacientes.html',
+            context=contexto,
+        )
+        return http_response
+
+def buscar_odontologo(request):
+    if request.method == "POST":
+        data = request.POST
+        busqueda = data["busqueda"]
+        # Filtro simple
+        # cursos = Curso.objects.filter(comision__contains=busqueda)
+        # Ejemplo filtro avanzado
+        odontologo = Odontologo.objects.filter(
+             Q(nombre__icontains=busqueda) | Q(identidicacion__contains=busqueda)
+        )
+
+        contexto = {
+            "odontologos": odontologo,
+        }
+        http_response = render(
+            request=request,
+            template_name='control_odonto/lista_odontologo.html',
+            context=contexto,
+        )
+        return http_response
+    
+def buscar_empleado(request):
+    if request.method == "POST":
+        data = request.POST
+        busqueda = data["busqueda"]
+        
+        empleado = Empleados.objects.filter(
+             Q(nombre__icontains=busqueda) | Q(apellido__contains=busqueda)
+        )
+
+        contexto = {
+            "empleados": empleado,
+        }
+        http_response = render(
+            request=request,
+            template_name='control_odonto/lista_empleados.html',
+            context=contexto,
+        )
+        return http_response
+    
+def buscar_consulta(request):
+    if request.method == "POST":
+        data = request.POST
+        busqueda = data["busqueda"]
+        
+        consulta = Consultas.objects.filter(
+             Q(profesional__icontains=busqueda) | Q(identificacion__contains=busqueda)
+        )
+
+        contexto = {
+            "consultas": consulta,
+        }
+        http_response = render(
+            request=request,
+            template_name='control_odonto/lista_consultas.html',
+            context=contexto,
+        )
+        return http_response
