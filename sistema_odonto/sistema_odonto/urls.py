@@ -24,7 +24,7 @@ urlpatterns = [
     # Aqui agregar mis URLS
     # path(RUTA, VIEW)
     # La RUTA de la URL puede ser diferente al nombre de la view
-    path("", saludar_con_html, name="inicio"),
+    
     path("inicio", saludar_con_html, name="inicio"),
     
 ]
