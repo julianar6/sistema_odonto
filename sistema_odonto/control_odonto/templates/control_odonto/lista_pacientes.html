@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>Control Odonto - Pacientes</title>
+{% endblock titulo %}
+
+{% block contenido %}
+<h3>Pacientes Registrados</h3>
+<a href="{% url 'crear_paciente' %}">Registrar paciente</a>
+<br>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Género</th>
+      <th>Teléfono</th>
+      <th>Identificación</th>
+      <th>Email</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for paciente in object_list %}
+    <tr>
+      <td>{{ paciente.id }}</td>
+      <td>{{ paciente.nombre }}</td>
+      <td>{{ paciente.apellido }}</td>
+      <td>{{ paciente.genero }}</td>
+      <td>{{ paciente.telefono }}</td>
+      <td>{{ paciente.identificacion }}</td>
+      <td>{{ paciente.email }}</td>
+      
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock contenido %}
