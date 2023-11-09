@@ -94,6 +94,28 @@ def crear_consulta(request):
         formulario = ConsultaForm()
 
     return render(request, 'control_odonto/crear_consulta.html', {'formulario': formulario})
+
+def crear_empleado(request):
+    if request.method == "POST":
+        formulario = EmpleadoForm(request.POST)
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+            empleado = Empleados(
+                nombre=data["nombre"],
+                apellido=data["apellido"],
+                genero=data["genero"],
+                identificacion=data["identificacion"],
+                antecedentes=data["antecedentes"],
+                tipo_id=data["tipo_id"],
+                fecha_nacimiento=data["fecha_nacimiento"],
+                email=data["email"]
+            )
+            empleado.save()
+            return redirect(reverse('listar_empleados'))  # Asegúrate de que esta URL exista en tu archivo urls.py
+    else:
+        formulario = EmpleadoForm()
+
+    return render(request, 'control_odonto/crear_empleado.html', {'formulario': formulario})
 def listar_consultas(request):
     
     contexto = {
@@ -108,9 +130,16 @@ def listar_consultas(request):
 
 def listar_empleados(request):
     
-    empleados = Empleados.objects.all()
+    contexto = {
+        "empleado": Empleados.objects.all(),
+    }
+    http_response = render(
+        request=request,
+        template_name='control_odonto/lista_empleados.html',
+        context=contexto,
+    )
+    return http_response
 
-    return render(request, 'lista_empleados.html', {'object_list': empleados})
     
 
 def listar_odontologo(request):

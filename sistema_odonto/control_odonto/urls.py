@@ -1,6 +1,6 @@
 from django import views
 from django.urls import path
-from control_odonto.views import listar_pacientes,crear_paciente,listar_consultas,listar_empleados,listar_odontologo,crear_odontologo,crear_consulta
+from control_odonto.views import listar_pacientes,crear_paciente,listar_consultas,listar_empleados,listar_odontologo,crear_odontologo,crear_consulta,crear_empleado
 
 urlpatterns = [
 
@@ -9,6 +9,7 @@ urlpatterns = [
     path("crear-paciente/", crear_paciente, name="crear_paciente"),
     path("crear-odontologo/", crear_odontologo, name="crear_odontologo"),
     path("crear-consulta/", crear_consulta, name="crear_consulta"),
+    path("crear-empleado/", crear_empleado, name="crear_empleado"),
     path("lista-consultas/", listar_consultas, name="listar_consultas"),
     path("lista-empleados/", listar_empleados, name="listar_empleados"),
     path("lista-odontologo/", listar_odontologo, name="listar_odontologo"),
