@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from control_odonto.models import Pacientes,Consultas,Empleados,Odontologo
+
+admin.site.register(Pacientes)
+admin.site.register(Consultas)
+admin.site.register(Empleados)
+admin.site.register(Odontologo)

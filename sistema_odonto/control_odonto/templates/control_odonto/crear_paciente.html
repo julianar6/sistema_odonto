@@ -1,10 +1,22 @@
 {% extends "base.html" %}
 
-{% block content %}
-  <h2>Crear Paciente</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Guardar</button>
-  </form>
-{% endblock content %}
+{% block contenido %}
+<form method="post">
+  {% csrf_token %}
+  <p>Nombre</p>
+  <input type="text" name="nombre">
+  <p>Apellido</p>
+  <input type="text" name="Apellido" step="1">
+  <p>Edad</p>
+  <input type="text" name="edad">
+  <p>Email</p>
+  <input type="Email" name="Email" step="1">
+  <p>Identificacion</p>
+  <input type="text" name="Identificacion">
+  <p>Apellido</p>
+  <input type="text" name="Apellido" step="1">
+  <br>
+  <br>
+  <input type="submit" value="Enviar">
+</form>
+{% endblock contenido %}
