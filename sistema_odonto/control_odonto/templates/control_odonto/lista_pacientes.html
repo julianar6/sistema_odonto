@@ -8,7 +8,9 @@
 <h3>Pacientes Registrados</h3>
 <a href="{% url 'crear_paciente' %}">Registrar paciente</a>
 <br>
-
+<form>
+  {% csrf_token %}
+</form>
 <table class="table">
   <thead>
     <tr>

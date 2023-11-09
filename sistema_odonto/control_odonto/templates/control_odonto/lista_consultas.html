@@ -8,7 +8,9 @@
 <h3>Consultas Registradas</h3>
 <a href="{% url 'crear_consulta' %}">Registrar Consulta</a>
 <br>
-
+<form>
+  {% csrf_token %}
+</form>
 <table class="table">
   <thead>
     <tr>

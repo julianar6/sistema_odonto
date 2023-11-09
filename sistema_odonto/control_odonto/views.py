@@ -6,7 +6,7 @@ from control_odonto.forms import PacienteForm,OdontologoForm,ConsultaForm,Emplea
 def listar_pacientes(request):
     # Data de pruebas, más adelante la llenaremos con nuestros cursos de verdad
     contexto = {
-        "paciente": Pacientes.objects.all(),
+        "pacientes": Pacientes.objects.all(),
     }
     http_response = render(
         request=request,
@@ -119,7 +119,7 @@ def crear_empleado(request):
 def listar_consultas(request):
     
     contexto = {
-        "consulta": Consultas.objects.all(),
+        "consultas": Consultas.objects.all(),
     }
     http_response = render(
         request=request,
@@ -131,7 +131,7 @@ def listar_consultas(request):
 def listar_empleados(request):
     
     contexto = {
-        "empleado": Empleados.objects.all(),
+        "empleados": Empleados.objects.all(),
     }
     http_response = render(
         request=request,
@@ -145,7 +145,7 @@ def listar_empleados(request):
 def listar_odontologo(request):
     
     contexto = {
-        "odontologo": Odontologo.objects.all(),
+        "odontologos": Odontologo.objects.all(),
     }
     http_response = render(
         request=request,
