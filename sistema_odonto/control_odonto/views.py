@@ -10,7 +10,7 @@ def listar_pacientes(request):
     }
     http_response = render(
         request=request,
-        template_name='lista_pacientes.html',
+        template_name='control_odonto/lista_pacientes.html',
         context=contexto,
     )
     return http_response
