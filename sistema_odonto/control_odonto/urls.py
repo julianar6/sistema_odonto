@@ -6,5 +6,4 @@ urlpatterns = [
 
     path("lista-paciente/", listar_pacientes, name="listar_paciente"),
     # URL para la creación de un nuevo paciente
-    path("crear_paciente/", crear_paciente, name="crear_paciente"),
 ]
