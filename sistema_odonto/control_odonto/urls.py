@@ -1,6 +1,6 @@
 from django import views
 from django.urls import path
-from control_odonto.views import listar_pacientes,crear_paciente,listar_consultas,listar_empleados,listar_odontologo,crear_odontologo,crear_consulta,crear_empleado,buscar_pacientes,buscar_odontologo,buscar_empleado,buscar_consulta,eliminar_paciente,eliminar_consulta,eliminar_empleados,eliminar_odontologo
+from control_odonto.views import listar_pacientes,crear_paciente,listar_consultas,listar_empleados,listar_odontologo,crear_odontologo,crear_consulta,crear_empleado,buscar_pacientes,buscar_odontologo,buscar_empleado,buscar_consulta,eliminar_paciente,eliminar_consulta,eliminar_empleados,eliminar_odontologo,editar_paciente,editar_odontologo,editar_consulta,editar_empleado
 
 urlpatterns = [
 
@@ -22,4 +22,8 @@ urlpatterns = [
     path('eliminar-consulta/<int:id>/', eliminar_consulta, name="eliminar_consulta"),
     path('eliminar-empleado/<int:id>/', eliminar_empleados, name="eliminar_empleado"),
     path('eliminar-odontologo/<int:id>/', eliminar_odontologo, name="eliminar_odontologo"),
+    path('editar-paciente/<int:id>/', editar_paciente, name="editar_paciente"),
+    path('editar-odontologo/<int:id>/', editar_odontologo, name="editar_odontologo"),
+    path('editar-consulta/<int:id>/', editar_consulta, name="editar_consulta"),
+    path('editar-empleado/<int:id>/',editar_empleado , name="editar_empleado"),
 ]

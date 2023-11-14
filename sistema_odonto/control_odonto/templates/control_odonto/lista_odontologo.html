@@ -40,6 +40,9 @@
       <td>{{ odontologo.fecha_nacimiento }}</td>
       <td>{{ odontologo.especialidad }}</td>
       <td>
+        <a href="{% url 'editar_odontologo' odontologo.id %}">Editar</a>
+      </td>
+      <td>
         <form action="{% url 'eliminar_odontologo' odontologo.id %}" method="post">
           {% csrf_token %}
           <input type="submit" value="eliminar"/>

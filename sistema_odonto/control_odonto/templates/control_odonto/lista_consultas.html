@@ -46,6 +46,9 @@
       <td>{{ consulta.valor_de_consulta }}</td>
       <td>{{ consulta.valor_total }}</td>
       <td>
+        <a href="{% url 'editar_consulta' consulta.id %}">Editar</a>
+      </td>
+      <td>
         <form action="{% url 'eliminar_consulta' consulta.id %}" method="post">
           {% csrf_token %}
           <input type="submit" value="eliminar"/>

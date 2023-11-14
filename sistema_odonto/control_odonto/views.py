@@ -261,3 +261,159 @@ def eliminar_odontologo(request, id):
        odontologo.delete()
        url_exitosa = reverse('listar_odontologo')
        return redirect(url_exitosa)
+   
+def editar_paciente(request, id):
+   paciente = Pacientes.objects.get(id=id)
+   if request.method == "POST":
+       formulario = PacienteForm(request.POST)
+
+       if formulario.is_valid():
+            data = formulario.cleaned_data
+            paciente.nombre = data ["nombre"]
+            paciente.apellido = data["apellido"]
+            paciente.genero = data["genero"]
+            paciente.telefono = data["telefono"]
+            paciente.identificacion = data["identificacion"]
+            paciente.antecedentes = data["antecedentes"]
+            paciente.tipo_id = data["tipo_id"]
+            paciente.fecha_nacimiento = data["fecha_nacimiento"]
+            paciente.email = data["email"]
+           
+            paciente.save()
+            url_exitosa = reverse('listar_paciente')
+            return redirect(url_exitosa)
+   else:  # GET
+       inicial = {
+           'nombre': paciente.nombre,
+           'apellido': paciente.apellido,
+           'genero': paciente.genero,
+           'telefono': paciente.telefono,
+           'identificacion': paciente.identificacion,
+           'antecedentes': paciente.antecedentes,
+           'tipo_id': paciente.tipo_id,
+           'fecha_nacimiento': paciente.fecha_nacimiento,
+           'email': paciente.email,
+
+       }
+       formulario = PacienteForm(initial=inicial)
+   return render(
+       request=request,
+       template_name='control_odonto/crear_paciente.html',
+       context={'formulario': formulario},
+   )
+
+def editar_odontologo(request, id):
+   odontologo = Odontologo.objects.get(id=id)
+   if request.method == "POST":
+       formulario = OdontologoForm(request.POST)
+
+       if formulario.is_valid():
+            data = formulario.cleaned_data
+            odontologo.nombre = data ["nombre"]
+            odontologo.apellido = data["apellido"]
+            odontologo.email = data["email"]
+            odontologo.telefono = data["telefono"]
+            odontologo.identidicacion = data["identidicacion"]
+            odontologo.especialidad = data["especialidad"]
+            odontologo.fecha_nacimiento = data["fecha_nacimiento"]
+            
+           
+            odontologo.save()
+            url_exitosa = reverse('listar_odontologo')
+            return redirect(url_exitosa)
+   else:  # GET
+       inicial = {
+           'nombre': odontologo.nombre,
+           'apellido': odontologo.apellido,
+           'email': odontologo.email,
+           'telefono': odontologo.telefono,
+           'identidicacion': odontologo.identidicacion,
+           'especialidad': odontologo.especialidad,
+           'fecha_nacimiento': odontologo.fecha_nacimiento,
+           
+
+       }
+       formulario = OdontologoForm(initial=inicial)
+   return render(
+       request=request,
+       template_name='control_odonto/crear_odontologo.html',
+       context={'formulario': formulario},
+   )
+
+def editar_consulta(request, id):
+   consulta = Consultas.objects.get(id=id)
+   if request.method == "POST":
+       formulario = ConsultaForm(request.POST)
+
+       if formulario.is_valid():
+            data = formulario.cleaned_data
+            consulta.profesional = data ["profesional"]
+            consulta.identificacion= data ["identificacion"]
+            consulta.codigo_cups = data["codigo_cups"]
+            consulta.finalidad_consulta = data["finalidad_consulta"]
+            consulta.causa_externa = data["causa_externa"]
+            consulta.codigo_diagnostico_ppal = data["codigo_diagnostico_ppal"]
+            consulta.codigo_diag_opc = data["codigo_diag_opc"]
+            consulta.valor_de_consulta = data["valor_de_consulta"]
+            consulta.valor_total = data["valor_total"]
+           
+            consulta.save()
+            url_exitosa = reverse('listar_consultas')
+            return redirect(url_exitosa)
+   else:  # GET
+       inicial = {
+           'profesional': consulta.profesional,
+           'codigo_cups': consulta.codigo_cups,
+           'finalidad_consulta': consulta.finalidad_consulta,
+           'causa_externa': consulta.causa_externa,
+           'codigo_diagnostico_ppal': consulta.codigo_diagnostico_ppal,
+           'codigo_diag_opc': consulta.codigo_diag_opc,
+           'valor_de_consulta': consulta.valor_de_consulta,
+           'valor_total': consulta.valor_total,
+           'identificacion': consulta.identificacion,
+
+       }
+       formulario = ConsultaForm(initial=inicial)
+   return render(
+       request=request,
+       template_name='control_odonto/crear_consulta.html',
+       context={'formulario': formulario},
+   )
+
+def editar_empleado(request, id):
+   empleado = Empleados.objects.get(id=id)
+   if request.method == "POST":
+       formulario = EmpleadoForm(request.POST)
+
+       if formulario.is_valid():
+            data = formulario.cleaned_data
+            empleado.nombre = data ["nombre"]
+            empleado.apellido = data["apellido"]
+            empleado.genero = data["genero"]
+            empleado.identificacion = data["identificacion"]
+            empleado.antecedentes = data["antecedentes"]
+            empleado.tipo_id = data["tipo_id"]
+            empleado.fecha_nacimiento = data["fecha_nacimiento"]
+            empleado.email = data["email"]
+           
+            empleado.save()
+            url_exitosa = reverse('listar_empleados')
+            return redirect(url_exitosa)
+   else:  # GET
+       inicial = {
+           'nombre': empleado.nombre,
+           'apellido': empleado.apellido,
+           'genero': empleado.genero,
+           'identificacion': empleado.identificacion,
+           'antecedentes': empleado.antecedentes,
+           'tipo_id': empleado.tipo_id,
+           'fecha_nacimiento': empleado.fecha_nacimiento,
+           'email': empleado.email,
+
+       }
+       formulario = EmpleadoForm(initial=inicial)
+   return render(
+       request=request,
+       template_name='control_odonto/crear_empleado.html',
+       context={'formulario': formulario},
+   )

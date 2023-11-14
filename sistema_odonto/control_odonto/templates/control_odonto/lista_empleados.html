@@ -38,6 +38,9 @@
       <td>{{ empleado.fecha_nacimiento }}</td>
       <td>{{ empleado.email }}</td>
       <td>
+        <a href="{% url 'editar_empleado' empleado.id %}">Editar</a>
+      </td>
+      <td>
         <form action="{% url 'eliminar_empleado' empleado.id %}" method="post">
           {% csrf_token %}
           <input type="submit" value="eliminar"/>
