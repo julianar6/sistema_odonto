@@ -37,6 +37,12 @@
       <td>{{ empleado.tipo_id }}</td>
       <td>{{ empleado.fecha_nacimiento }}</td>
       <td>{{ empleado.email }}</td>
+      <td>
+        <form action="{% url 'eliminar_empleado' empleado.id %}" method="post">
+          {% csrf_token %}
+          <input type="submit" value="eliminar"/>
+        </form>
+      </td>
       
       </td>
     </tr>

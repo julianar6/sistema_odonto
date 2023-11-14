@@ -167,7 +167,7 @@ def buscar_pacientes(request):
         )
 
         contexto = {
-            "pacientes": paciente,
+            "pacientes": paciente ,
         }
         http_response = render(
             request=request,
@@ -234,3 +234,30 @@ def buscar_consulta(request):
             context=contexto,
         )
         return http_response
+def eliminar_paciente(request, id):
+   paciente = Pacientes.objects.get(id=id)
+   if request.method == "POST":
+       paciente.delete()
+       url_exitosa = reverse('listar_paciente')
+       return redirect(url_exitosa)
+   
+def eliminar_consulta(request, id):
+   consulta = Consultas.objects.get(id=id)
+   if request.method == "POST":
+       consulta.delete()
+       url_exitosa = reverse('listar_consultas')
+       return redirect(url_exitosa)
+   
+def eliminar_empleados(request, id):
+   empleado = Empleados.objects.get(id=id)
+   if request.method == "POST":
+       empleado.delete()
+       url_exitosa = reverse('listar_empleados')
+       return redirect(url_exitosa)
+   
+def eliminar_odontologo(request, id):
+   odontologo = Odontologo.objects.get(id=id)
+   if request.method == "POST":
+       odontologo.delete()
+       url_exitosa = reverse('listar_odontologo')
+       return redirect(url_exitosa)

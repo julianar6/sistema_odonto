@@ -25,6 +25,7 @@
       <th>Identificación</th>
       <th>Email</th>
       <th>Acciones</th>
+      <th>Eliminar</th>
     </tr>
   </thead>
   <tbody>
@@ -38,7 +39,13 @@
       <td>{{ paciente.telefono }}</td>
       <td>{{ paciente.identificacion }}</td>
       <td>{{ paciente.email }}</td>
-      
+      <td>
+        <form action="{% url 'eliminar_pacientes' paciente.id %}" method="post">
+          {% csrf_token %}
+          <input type="submit" value="eliminar"/>
+        </form>
+      </td>
+     
       </td>
     </tr>
     {% endfor %}

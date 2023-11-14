@@ -39,6 +39,12 @@
       <td>{{ odontologo.identidicacion }}</td>
       <td>{{ odontologo.fecha_nacimiento }}</td>
       <td>{{ odontologo.especialidad }}</td>
+      <td>
+        <form action="{% url 'eliminar_odontologo' odontologo.id %}" method="post">
+          {% csrf_token %}
+          <input type="submit" value="eliminar"/>
+        </form>
+      </td>
       
       </td>
     </tr>
