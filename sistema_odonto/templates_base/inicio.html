@@ -6,5 +6,10 @@
 
 
 {% block contenido %}
-<h1>Bienvenidos a su consola</h1>
+
+{% if user.is_authenticated %}
+<h1>Bienvenido/a {{ user.last_name }}, {{ user.first_name }}</h1>
+{% else %}
+<h1>Bienvenido/a visitante</h1>
+{% endif %}
 {% endblock contenido %}
