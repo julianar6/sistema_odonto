@@ -26,5 +26,6 @@ urlpatterns = [
     # La RUTA de la URL puede ser diferente al nombre de la view
     path("", inicio, name="inicio"),
     path("inicio", saludar_con_html, name="inicio"),
-    path ("consultorio/",include ("control_odonto.urls"))
+    path ("consultorio/",include ("control_odonto.urls")),
+    path ("perfiles/",include ("perfiles.urls")),
 ]
