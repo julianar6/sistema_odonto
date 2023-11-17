@@ -1,6 +1,7 @@
 from django.db.models import Q
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 from control_odonto.models import Consultas,Pacientes,Odontologo,Empleados
 from control_odonto.forms import PacienteForm,OdontologoForm,ConsultaForm,EmpleadoForm
 
@@ -15,7 +16,7 @@ def listar_pacientes(request):
         context=contexto,
     )
     return http_response
-
+@login_required
 def crear_paciente(request):
     if request.method == "POST":
         # Creo un objeto formulario con la data que envió el usuario
@@ -33,6 +34,7 @@ def crear_paciente(request):
             tipo_id = data["tipo_id"]
             fecha_nacimiento = data["fecha_nacimiento"]
             email = data["email"]
+            creador= request.user,
 
             pacientes = Pacientes( nombre=nombre, apellido=apellido,genero=genero,telefono=telefono,identificacion=identificacion,antecedentes=antecedentes,tipo_id=tipo_id,fecha_nacimiento=fecha_nacimiento,email=email)
             pacientes.save ()
@@ -50,7 +52,7 @@ def crear_paciente(request):
         context={'formulario': formulario}
     )
     return http_response
-
+@login_required
 def crear_odontologo(request):
     if request.method == "POST":
         formulario = OdontologoForm(request.POST)
@@ -63,7 +65,8 @@ def crear_odontologo(request):
                 telefono=data["telefono"],
                 identidicacion=data["identidicacion"],
                 fecha_nacimiento=data["fecha_nacimiento"],
-                especialidad=data["especialidad"]
+                especialidad=data["especialidad"],
+                creador= request.user,
             )
             odontologo.save()
             return redirect(reverse('listar_odontologo'))  # Asegúrate de que esta URL exista en tu archivo urls.py
@@ -71,7 +74,7 @@ def crear_odontologo(request):
         formulario = OdontologoForm()
 
     return render(request, 'control_odonto/crear_odontologo.html', {'formulario': formulario})
-
+@login_required
 def crear_consulta(request):
     if request.method == "POST":
         formulario = ConsultaForm(request.POST)
@@ -87,7 +90,8 @@ def crear_consulta(request):
                 codigo_diagnostico_ppal=data["codigo_diagnostico_ppal"],
                 codigo_diag_opc=data["codigo_diag_opc"],
                 valor_de_consulta=data["valor_de_consulta"],
-                valor_total=data["valor_total"]
+                valor_total=data["valor_total"],
+                creador= request.user,
             )
             consulta.save()
             return redirect(reverse('listar_consultas'))  # Asegúrate de que esta URL exista en tu archivo urls.py
@@ -95,7 +99,7 @@ def crear_consulta(request):
         formulario = ConsultaForm()
 
     return render(request, 'control_odonto/crear_consulta.html', {'formulario': formulario})
-
+@login_required
 def crear_empleado(request):
     if request.method == "POST":
         formulario = EmpleadoForm(request.POST)
@@ -109,7 +113,8 @@ def crear_empleado(request):
                 antecedentes=data["antecedentes"],
                 tipo_id=data["tipo_id"],
                 fecha_nacimiento=data["fecha_nacimiento"],
-                email=data["email"]
+                email=data["email"],
+                creador= request.user,
             )
             empleado.save()
             return redirect(reverse('listar_empleados'))  # Asegúrate de que esta URL exista en tu archivo urls.py
@@ -117,6 +122,7 @@ def crear_empleado(request):
         formulario = EmpleadoForm()
 
     return render(request, 'control_odonto/crear_empleado.html', {'formulario': formulario})
+
 def listar_consultas(request):
     
     contexto = {
@@ -140,8 +146,6 @@ def listar_empleados(request):
         context=contexto,
     )
     return http_response
-
-    
 
 def listar_odontologo(request):
     
@@ -234,34 +238,35 @@ def buscar_consulta(request):
             context=contexto,
         )
         return http_response
+@login_required    
 def eliminar_paciente(request, id):
    paciente = Pacientes.objects.get(id=id)
    if request.method == "POST":
        paciente.delete()
        url_exitosa = reverse('listar_paciente')
        return redirect(url_exitosa)
-   
+@login_required   
 def eliminar_consulta(request, id):
    consulta = Consultas.objects.get(id=id)
    if request.method == "POST":
        consulta.delete()
        url_exitosa = reverse('listar_consultas')
        return redirect(url_exitosa)
-   
+@login_required   
 def eliminar_empleados(request, id):
    empleado = Empleados.objects.get(id=id)
    if request.method == "POST":
        empleado.delete()
        url_exitosa = reverse('listar_empleados')
        return redirect(url_exitosa)
-   
+@login_required   
 def eliminar_odontologo(request, id):
    odontologo = Odontologo.objects.get(id=id)
    if request.method == "POST":
        odontologo.delete()
        url_exitosa = reverse('listar_odontologo')
        return redirect(url_exitosa)
-   
+@login_required   
 def editar_paciente(request, id):
    paciente = Pacientes.objects.get(id=id)
    if request.method == "POST":
@@ -301,7 +306,7 @@ def editar_paciente(request, id):
        template_name='control_odonto/crear_paciente.html',
        context={'formulario': formulario},
    )
-
+@login_required
 def editar_odontologo(request, id):
    odontologo = Odontologo.objects.get(id=id)
    if request.method == "POST":
@@ -339,7 +344,7 @@ def editar_odontologo(request, id):
        template_name='control_odonto/crear_odontologo.html',
        context={'formulario': formulario},
    )
-
+@login_required
 def editar_consulta(request, id):
    consulta = Consultas.objects.get(id=id)
    if request.method == "POST":
@@ -379,7 +384,7 @@ def editar_consulta(request, id):
        template_name='control_odonto/crear_consulta.html',
        context={'formulario': formulario},
    )
-
+@login_required
 def editar_empleado(request, id):
    empleado = Empleados.objects.get(id=id)
    if request.method == "POST":

@@ -40,13 +40,17 @@
       <td>{{ odontologo.fecha_nacimiento }}</td>
       <td>{{ odontologo.especialidad }}</td>
       <td>
+        {% if user == odontologo.creador %}
         <a href="{% url 'editar_odontologo' odontologo.id %}">Editar</a>
+        {% endif %}
       </td>
       <td>
+        {% if user == empleado.creador %}
         <form action="{% url 'eliminar_odontologo' odontologo.id %}" method="post">
           {% csrf_token %}
           <input type="submit" value="eliminar"/>
         </form>
+        {% endif %}
       </td>
       
       </td>

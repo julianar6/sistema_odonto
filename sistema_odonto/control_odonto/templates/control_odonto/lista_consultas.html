@@ -6,7 +6,7 @@
 
 {% block contenido %}
 <h3>Consultas Registradas</h3>
-<a href="{% url 'crear_consulta' %}">Registrar Consulta</a>
+<a href="{% url 'crear_consulta' %}">Crear Consulta</a>
 <br>
 <form action="{% url 'buscar_consulta' %}" method="post">
   {% csrf_token %}
@@ -46,13 +46,19 @@
       <td>{{ consulta.valor_de_consulta }}</td>
       <td>{{ consulta.valor_total }}</td>
       <td>
-        <a href="{% url 'editar_consulta' consulta.id %}">Editar</a>
+        {% if user == consulta.creador %}
+
+        <a class="btn btn-link" href="{% url 'editar_consulta' consulta.id %}">Editar</a>
+        
+        {% endif %}
       </td>
       <td>
+        {% if user == consulta.creador %}
         <form action="{% url 'eliminar_consulta' consulta.id %}" method="post">
           {% csrf_token %}
           <input type="submit" value="eliminar"/>
         </form>
+        {% endif %}
       </td>
      
       </td>

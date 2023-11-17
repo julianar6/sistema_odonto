@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from sistema_odonto.views import saludar_con_html,inicio
+from sistema_odonto.views import saludar_con_html,inicio,about
+from django.conf import settings
+from django.conf.urls.static import static  
 
 
 urlpatterns = [
@@ -28,4 +30,8 @@ urlpatterns = [
     path("inicio", saludar_con_html, name="inicio"),
     path ("consultorio/",include ("control_odonto.urls")),
     path ("perfiles/",include ("perfiles.urls")),
+    path ("acerca-de-mi/",about,name="about"),
+    
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

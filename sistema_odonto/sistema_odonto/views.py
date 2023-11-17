@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 
 def saludar_con_html(request):
@@ -9,11 +9,21 @@ def saludar_con_html(request):
         context=contexto,
     )
     return http_response
+
 def inicio(request):
     contexto = {}
     http_response = render(
         request=request,
         template_name='base.html',
+        context=contexto,
+    )
+    return http_response
+
+def about(request):
+    contexto = {}
+    http_response = render(
+        request=request,
+        template_name='about.html',
         context=contexto,
     )
     return http_response
