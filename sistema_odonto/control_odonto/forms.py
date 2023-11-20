@@ -12,7 +12,7 @@ class PacienteForm(forms.Form):
     email = forms.EmailField(required=False)
 class OdontologoForm(forms.Form):
     nombre = forms.CharField(required=True, max_length=256)
-    apellido = forms.CharField(required=True, max_length=256)
+    apellido = forms.CharField(required=False, max_length=256)
     email = forms.EmailField(required=False)
     telefono = forms.CharField(max_length=20, required=False)
     identidicacion = forms.CharField(required=True, max_length=32)

@@ -20,12 +20,11 @@
       <th>ID</th>
       <th>Nombre</th>
       <th>Apellido</th>
-      <th>Género</th>
       <th>Teléfono</th>
       <th>Identificación</th>
       <th>Email</th>
-      <th>Acciones</th>
-      <th>Eliminar</th>
+      <th>Accion</th>
+      <th>Accion2</th>
     </tr>
   </thead>
   <tbody>
@@ -35,17 +34,18 @@
       <td>{{ paciente.id }}</td>
       <td>{{ paciente.nombre }}</td>
       <td>{{ paciente.apellido }}</td>
-      <td>{{ paciente.genero }}</td>
       <td>{{ paciente.telefono }}</td>
       <td>{{ paciente.identificacion }}</td>
       <td>{{ paciente.email }}</td>
+      <td><a href="{% url 'ver_paciente' paciente.id %}">Ver</a></td>
+      
       <td>
         {% if user == paciente.creador %}
         <a href="{% url 'editar_paciente' paciente.id %}">Editar</a>
         {% endif %}
       </td>
       <td>
-        {% if user == odontologo.creador %}
+        {% if user == paciente.creador %}
         <form action="{% url 'eliminar_pacientes' paciente.id %}" method="post">
           {% csrf_token %}
           <input type="submit" value="eliminar"/>

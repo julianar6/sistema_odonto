@@ -1,10 +1,10 @@
 from django.db.models import Q
 from django.shortcuts import redirect, render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from control_odonto.models import Consultas,Pacientes,Odontologo,Empleados
 from control_odonto.forms import PacienteForm,OdontologoForm,ConsultaForm,EmpleadoForm
-
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 def listar_pacientes(request):
     # Data de pruebas, más adelante la llenaremos con nuestros cursos de verdad
     contexto = {
@@ -420,5 +420,45 @@ def editar_empleado(request, id):
    return render(
        request=request,
        template_name='control_odonto/crear_empleado.html',
+       context={'formulario': formulario},
+   )
+
+def ver_paciente(request, id):
+   paciente = Pacientes.objects.get(id=id)
+   if request.method == "POST":
+       formulario = PacienteForm(request.POST)
+
+       if formulario.is_valid():
+            data = formulario.cleaned_data
+            paciente.nombre = data ["nombre"]
+            paciente.apellido = data["apellido"]
+            paciente.genero = data["genero"]
+            paciente.telefono = data["telefono"]
+            paciente.identificacion = data["identificacion"]
+            paciente.antecedentes = data["antecedentes"]
+            paciente.tipo_id = data["tipo_id"]
+            paciente.fecha_nacimiento = data["fecha_nacimiento"]
+            paciente.email = data["email"]
+           
+            paciente.save()
+            url_exitosa = reverse('listar_paciente')
+            return redirect(url_exitosa)
+   else:  # GET
+       inicial = {
+           'nombre': paciente.nombre,
+           'apellido': paciente.apellido,
+           'genero': paciente.genero,
+           'telefono': paciente.telefono,
+           'identificacion': paciente.identificacion,
+           'antecedentes': paciente.antecedentes,
+           'tipo_id': paciente.tipo_id,
+           'fecha_nacimiento': paciente.fecha_nacimiento,
+           'email': paciente.email,
+
+       }
+       formulario = PacienteForm(initial=inicial)
+   return render(
+       request=request,
+       template_name='control_odonto/paciente_detail.html',
        context={'formulario': formulario},
    )

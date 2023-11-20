@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>Control Odonto - Ver paciente</title>
+{% endblock titulo %}
+
+{% block contenido %}
+<h3>ver paciente</h3>
+<form method="post">
+  {% csrf_token %}
+  {{ formulario.as_p }}
+  
+</form>
+<br>
+<a href="{% url 'listar_paciente' %}">Volver a la lista</a>
+{% endblock contenido %}
