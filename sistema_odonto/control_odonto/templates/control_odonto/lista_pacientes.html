@@ -37,23 +37,26 @@
       <td>{{ paciente.telefono }}</td>
       <td>{{ paciente.identificacion }}</td>
       <td>{{ paciente.email }}</td>
+
       <td><a href="{% url 'ver_paciente' paciente.id %}">Ver</a></td>
       
       <td>
         {% if user == paciente.creador %}
+        
         <a href="{% url 'editar_paciente' paciente.id %}">Editar</a>
+        
         {% endif %}
       </td>
       <td>
         {% if user == paciente.creador %}
-        <form action="{% url 'eliminar_pacientes' paciente.id %}" method="post">
+       <form action="{% url 'eliminar_pacientes' paciente.id %}" method="post">
           {% csrf_token %}
           <input type="submit" value="eliminar"/>
         </form>
         {% endif %}
       </td>
      
-      </td>
+    
     </tr>
     {% endfor %}
   </tbody>

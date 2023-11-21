@@ -27,6 +27,7 @@ class Odontologo(models.Model):
     fecha_nacimiento = models.DateField(null=True)
     especialidad = models.CharField(max_length=32)
     creador = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    
     def __str__(self):
         return f"{self.nombre} ({self.identidicacion})"
 

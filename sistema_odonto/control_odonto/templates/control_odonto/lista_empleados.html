@@ -37,6 +37,8 @@
       <td>{{ empleado.tipo_id }}</td>
       <td>{{ empleado.fecha_nacimiento }}</td>
       <td>{{ empleado.email }}</td>
+
+      <td><a href="{% url 'ver_empleado' empleado.id %}">Ver</a></td>
       <td>
         {% if user == empleado.creador %}
         

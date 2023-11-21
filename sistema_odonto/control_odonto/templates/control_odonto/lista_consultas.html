@@ -45,6 +45,7 @@
       <td>{{ consulta.codigo_diag_opc }}</td>
       <td>{{ consulta.valor_de_consulta }}</td>
       <td>{{ consulta.valor_total }}</td>
+      <td><a href="{% url 'ver_consulta' consulta.id %}">Ver</a></td>
       <td>
         {% if user == consulta.creador %}
 

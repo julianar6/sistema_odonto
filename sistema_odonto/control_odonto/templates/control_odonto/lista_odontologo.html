@@ -39,7 +39,8 @@
       <td>{{ odontologo.identidicacion }}</td>
       <td>{{ odontologo.fecha_nacimiento }}</td>
       <td>{{ odontologo.especialidad }}</td>
-      
+
+      <td><a href="{% url 'ver_odontologo' odontologo.id %}">Ver</a></td>
       <td>
         {% if user == odontologo.creador %}
         <a href="{% url 'editar_odontologo' odontologo.id %}">Editar</a>

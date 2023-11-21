@@ -16,6 +16,7 @@ def listar_pacientes(request):
         context=contexto,
     )
     return http_response
+
 @login_required
 def crear_paciente(request):
     if request.method == "POST":
@@ -23,20 +24,20 @@ def crear_paciente(request):
         formulario = PacienteForm(request.POST)
 
         if formulario.is_valid():
-            
             data = formulario.cleaned_data
-            nombre = data["nombre"]
-            apellido = data["apellido"]
-            genero = data["genero"]
-            telefono = data["telefono"]
-            identificacion = data["identificacion"]
-            antecedentes = data["antecedentes"]
-            tipo_id = data["tipo_id"]
-            fecha_nacimiento = data["fecha_nacimiento"]
-            email = data["email"]
-            creador= request.user,
+            pacientes = Pacientes(
+                nombre = data["nombre"],
+                apellido = data["apellido"],
+                genero = data["genero"],
+                telefono = data["telefono"],
+                identificacion = data["identificacion"],
+                antecedentes = data["antecedentes"],
+                tipo_id = data["tipo_id"],
+                fecha_nacimiento = data["fecha_nacimiento"],
+                email = data["email"],
+                creador = request.user,
+            )
 
-            pacientes = Pacientes( nombre=nombre, apellido=apellido,genero=genero,telefono=telefono,identificacion=identificacion,antecedentes=antecedentes,tipo_id=tipo_id,fecha_nacimiento=fecha_nacimiento,email=email)
             pacientes.save ()
             # Redirecciono al usuario a la lista de pacientes
             url_exitosa = reverse('listar_paciente')  # Asegúrate de que esta URL exista en tu archivo urls.py
@@ -238,6 +239,7 @@ def buscar_consulta(request):
             context=contexto,
         )
         return http_response
+    
 @login_required    
 def eliminar_paciente(request, id):
    paciente = Pacientes.objects.get(id=id)
@@ -424,6 +426,7 @@ def editar_empleado(request, id):
    )
 
 def ver_paciente(request, id):
+   
    paciente = Pacientes.objects.get(id=id)
    if request.method == "POST":
        formulario = PacienteForm(request.POST)
@@ -460,5 +463,120 @@ def ver_paciente(request, id):
    return render(
        request=request,
        template_name='control_odonto/paciente_detail.html',
+       context={'formulario': formulario},
+   )
+
+def ver_odontologo(request, id):
+   odontologo = Odontologo.objects.get(id=id)
+   if request.method == "POST":
+       formulario = OdontologoForm(request.POST)
+
+       if formulario.is_valid():
+            data = formulario.cleaned_data
+            odontologo.nombre = data ["nombre"]
+            odontologo.apellido = data["apellido"]
+            odontologo.email = data["email"]
+            odontologo.telefono = data["telefono"]
+            odontologo.identidicacion = data["identidicacion"]
+            odontologo.especialidad = data["especialidad"]
+            odontologo.fecha_nacimiento = data["fecha_nacimiento"]
+           
+            odontologo.save()
+            url_exitosa = reverse('listar_odontologo')
+            return redirect(url_exitosa)
+   else:  # GET
+       inicial = {
+            'nombre': odontologo.nombre,
+            'apellido': odontologo.apellido,
+            'email': odontologo.email,
+            'telefono': odontologo.telefono,
+            'identidicacion': odontologo.identidicacion,
+            'especialidad': odontologo.especialidad,
+            'fecha_nacimiento': odontologo.fecha_nacimiento,
+
+       }
+       formulario = OdontologoForm(initial=inicial)
+   return render(
+       request=request,
+       template_name='control_odonto/odontologo_detail.html',
+       context={'formulario': formulario},
+   )
+
+def ver_consulta(request, id):
+   consulta = Consultas.objects.get(id=id)
+   if request.method == "POST":
+       formulario = ConsultaForm(request.POST)
+
+       if formulario.is_valid():
+            data = formulario.cleaned_data
+            consulta.profesional = data ["profesional"]
+            consulta.identificacion= data ["identificacion"]
+            consulta.codigo_cups = data["codigo_cups"]
+            consulta.finalidad_consulta = data["finalidad_consulta"]
+            consulta.causa_externa = data["causa_externa"]
+            consulta.codigo_diagnostico_ppal = data["codigo_diagnostico_ppal"]
+            consulta.codigo_diag_opc = data["codigo_diag_opc"]
+            consulta.valor_de_consulta = data["valor_de_consulta"]
+            consulta.valor_total = data["valor_total"]
+           
+            consulta.save()
+            url_exitosa = reverse('listar_consultas')
+            return redirect(url_exitosa)
+   else:  # GET
+       inicial = {
+           'profesional': consulta.profesional,
+           'codigo_cups': consulta.codigo_cups,
+           'finalidad_consulta': consulta.finalidad_consulta,
+           'causa_externa': consulta.causa_externa,
+           'codigo_diagnostico_ppal': consulta.codigo_diagnostico_ppal,
+           'codigo_diag_opc': consulta.codigo_diag_opc,
+           'valor_de_consulta': consulta.valor_de_consulta,
+           'valor_total': consulta.valor_total,
+           'identificacion': consulta.identificacion,
+
+       }
+       formulario = ConsultaForm(initial=inicial)
+
+       return render(
+       request=request,
+       template_name='control_odonto/consulta_detail.html',
+       context={'formulario': formulario},
+   )
+def ver_empleado(request, id):
+   empleado = Empleados.objects.get(id=id)
+   if request.method == "POST":
+       formulario = EmpleadoForm(request.POST)
+
+       if formulario.is_valid():
+            data = formulario.cleaned_data
+            empleado.nombre = data ["nombre"]
+            empleado.apellido = data["apellido"]
+            empleado.genero = data["genero"]
+            empleado.identificacion = data["identificacion"]
+            empleado.antecedentes = data["antecedentes"]
+            empleado.tipo_id = data["tipo_id"]
+            empleado.fecha_nacimiento = data["fecha_nacimiento"]
+            empleado.email = data["email"]
+           
+            empleado.save()
+            url_exitosa = reverse('listar_empleados')
+            return redirect(url_exitosa)
+   else:  # GET
+       inicial = {
+           'nombre': empleado.nombre,
+           'apellido': empleado.apellido,
+           'genero': empleado.genero,
+           'identificacion': empleado.identificacion,
+           'antecedentes': empleado.antecedentes,
+           'tipo_id': empleado.tipo_id,
+           'fecha_nacimiento': empleado.fecha_nacimiento,
+           'email': empleado.email,
+
+       }
+       formulario = EmpleadoForm(initial=inicial)
+
+       return render(
+       request=request,
+       template_name='control_odonto/empleado_detail.html',
        context={'formulario': formulario},
    )
